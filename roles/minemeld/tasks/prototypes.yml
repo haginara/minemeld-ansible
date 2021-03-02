@@ -4,6 +4,7 @@
     clone: yes
     dest: "{{prototypes_repo_directory}}/minemeld-node-prototypes"
     version: "{{minemeld_prototypes_version}}"
+    force: true
 - name: minemeld-node-prototypes current link
   file:
     src: "{{prototypes_repo_directory}}/minemeld-node-prototypes/prototypes"

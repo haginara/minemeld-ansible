@@ -3,6 +3,7 @@ infrastructure_packages:
   - redis-server
   - collectd-core
   - nginx
+  - python-ujson
 
 # services
 redis_server_service: redis

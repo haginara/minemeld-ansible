@@ -5,6 +5,7 @@
     clone: yes
     dest: "{{engine_directory}}/core"
     version: "{{minemeld_core_version}}"
+    force: true
 
 # creates the virtualenv in the engine/current directory and install reqs
 - name: virtualenv
@@ -30,6 +31,10 @@
   command: "{{venv_directory}}/bin/pip install -e {{engine_directory}}/core"
 - name: create extensions frigidaire
   command: "{{venv_directory}}/bin/mm-extensions-freeze {{library_directory}} {{library_directory}}/freeze.txt"
+- name: backup ujson.so
+  command: "mv {{engine_directory}}/current/lib/python2.7/site-packages/ujson.so {{engine_directory}}/current/lib/python2.7/site-packages/ujson.so.bak"
+- name: Update ujson.so
+  command: "cp /usr/lib/python2.7/dist-packages/ujson.x86_64-linux-gnu.so {{engine_directory}}/current/lib/python2.7/site-packages/ujson.so"
 - name: create constraints file
   shell: "{{venv_directory}}/bin/pip freeze | grep -v minemeld-core > {{library_directory}}/constraints.txt"
 - name: create config file
